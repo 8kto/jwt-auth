@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "JWT Node app",
+		"_postman_id": "2b3728b6-01ab-bf38-a74f-6e3a132c432f",
+		"description": "https://github.com/8kto/jwt-auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /users",
+			"request": {
+				"url": "http://localhost:5000/api/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET activate/:link",
+			"request": {
+				"url": "http://localhost:5000/api/activate/f9404c53-befc-471f-b771-ad135a476e03",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET registration",
+			"request": {
+				"url": "http://localhost:5000/api/registration",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"mymail@example.org\",\n\t\"password\": \"test :)\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
