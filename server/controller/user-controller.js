@@ -1,4 +1,5 @@
 const userService = require('../service/user-service')
+const UserModel = require('../models/user-model')
 
 class UserController {
   async registration (req, res, next) {
@@ -12,7 +13,7 @@ class UserController {
 
       return res.json(userData)
     } catch (e) {
-
+      console.error(e)
     }
   }
 
@@ -20,7 +21,7 @@ class UserController {
     try {
 
     } catch (e) {
-
+      console.error(e)
     }
   }
 
@@ -28,7 +29,7 @@ class UserController {
     try {
 
     } catch (e) {
-
+      console.error(e)
     }
   }
 
@@ -36,23 +37,27 @@ class UserController {
     try {
 
     } catch (e) {
-
+      console.error(e)
     }
   }
 
   async activate (req, res, next) {
     try {
+      const activationLink = req.params.link
+      await userService.activate(activationLink)
 
+      return res.redirect(process.env.CLIENT_URL)
     } catch (e) {
-
+      console.error(e)
     }
   }
 
   async getUsers (req, res, next) {
     try {
-      res.json([1, 2])
+      const users = await UserModel.find()
+      res.json(users)
     } catch (e) {
-
+      console.error(e)
     }
   }
 }

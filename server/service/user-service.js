@@ -6,7 +6,7 @@ const UserDto = require('../dto/user-dto')
 const mailService = require('./mail-service')
 const tokenService = require('./token-service')
 
-class MailService {
+class UserService {
   async registration (email, password) {
     const candidate = await UserModel.findOne({ email })
     if (candidate) {
@@ -29,6 +29,15 @@ class MailService {
       user: userDto,
     }
   }
+
+  async activate (activationLink) {
+    const user = await UserModel.findOne({ activationLink })
+    if (!user) {
+      throw new Error('User does not exist')
+    }
+
+    await UserModel.updateOne({ activationLink }, { isActivated: true })
+  }
 }
 
-module.exports = new MailService()
+module.exports = new UserService()
