@@ -48,6 +48,26 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "GET registration with validation errors",
+			"request": {
+				"url": "http://localhost:5000/api/registration",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"mymaiexample.org\",\n\t\"password\": \"test :)\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
