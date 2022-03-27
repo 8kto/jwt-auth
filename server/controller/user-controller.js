@@ -13,7 +13,7 @@ class UserController {
 
       return res.json(userData)
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 
@@ -21,7 +21,7 @@ class UserController {
     try {
 
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 
@@ -29,7 +29,7 @@ class UserController {
     try {
 
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 
@@ -37,7 +37,7 @@ class UserController {
     try {
 
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 
@@ -48,7 +48,7 @@ class UserController {
 
       return res.redirect(process.env.CLIENT_URL)
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 
@@ -57,7 +57,7 @@ class UserController {
       const users = await UserModel.find()
       res.json(users)
     } catch (e) {
-      console.error(e)
+      next(e)
     }
   }
 }

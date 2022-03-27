@@ -5,12 +5,13 @@ const UserModel = require('../models/user-model')
 const UserDto = require('../dto/user-dto')
 const mailService = require('./mail-service')
 const tokenService = require('./token-service')
+const ApiError = require('../exceptions/api-error')
 
 class UserService {
   async registration (email, password) {
     const candidate = await UserModel.findOne({ email })
     if (candidate) {
-      throw new Error('Exist')
+      throw ApiError.BadRequest(`User ${email} Exist`)
     }
 
     const hashPass = await bcrypt.hash(password, 3)
@@ -20,7 +21,7 @@ class UserService {
 
     await mailService.sendActivationMail(email, activationLink)
 
-    const userDto = new UserDto(model)
+    const userDto = new UserDto(user)
     const tokens = tokenService.generateTokens({ ...userDto })
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
@@ -33,7 +34,7 @@ class UserService {
   async activate (activationLink) {
     const user = await UserModel.findOne({ activationLink })
     if (!user) {
-      throw new Error('User does not exist')
+      throw ApiError.BadRequest(('User does not exist'))
     }
 
     await UserModel.updateOne({ activationLink }, { isActivated: true })
