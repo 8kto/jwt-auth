@@ -68,6 +68,46 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "GET login",
+			"request": {
+				"url": "http://localhost:5000/api/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"damn1@example.org\",\n\t\"password\": \"test :)\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET logout",
+			"request": {
+				"url": "http://localhost:5000/api/logout",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"damn1@example.org\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
