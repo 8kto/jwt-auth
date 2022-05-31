@@ -1,11 +1,15 @@
 import {IUser} from "../models/IUser";
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService";
+import axios from "axios";
+import AuthResponse from "../models/response/AuthResponse";
+import {API_URL} from "../http";
 
 
 export default class Store {
   user = {} as IUser
   isAuth = false
+  isLoading = false
 
   constructor() {
     makeAutoObservable(this)
@@ -17,6 +21,10 @@ export default class Store {
 
   setUser(user: IUser) {
     this.user = user
+  }
+
+  setIsLoading(value: boolean) {
+    this.isLoading = value;
   }
 
   async login(email: string, pass: string) {
@@ -54,6 +62,25 @@ export default class Store {
     } catch (e) {
       // @ts-ignore
       console.log(e.response?.data?.message)
+    }
+  }
+
+
+  async checkAuth() {
+    this.setIsLoading(true)
+
+    try {
+      const res = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+        withCredentials: true
+      })
+      localStorage.setItem('token', res.data.accessToken)
+      this.setAuth(true)
+      this.setUser(res.data.user)
+    } catch (e) {
+      // @ts-ignore
+      console.log(e.response?.data?.message)
+    } finally {
+      this.setIsLoading(false)
     }
   }
 }
